@@ -1,5 +1,6 @@
 #include "Fraction.h"
 
- Fraction::Fraction(const int whole, const int fract)
+ Fraction::Fraction(const signed long int whole, const unsigned short int fract)
 {
+
 }
