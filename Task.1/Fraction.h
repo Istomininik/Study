@@ -16,7 +16,7 @@ public:
 	 * @param whole Целая часть.
 	 * @param fract Дробная часть.
 	*/
-	Fraction(const int whole, const int fract);
+	Fraction(const signed long int whole, const unsigned short int fract);
 	/**
 	 * @brief Конструктор копирования.
 	 * @param other Другое дробное число.
