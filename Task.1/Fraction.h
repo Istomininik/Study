@@ -6,93 +6,6 @@
 */
 class Fraction
 {
-public:
-	/**
-	 * @brief Конструктор по умолчанию.
-	*/
-	Fraction();
-	/**
-	 * @brief Параметризованный конструктор.
-	 * @param whole Целая часть.
-	 * @param fract Дробная часть.
-	*/
-	Fraction(const signed long int whole, const unsigned short int fract);
-	/**
-	 * @brief Конструктор копирования.
-	 * @param other Другое дробное число.
-	*/
-	Fraction(const Fraction& other);
-	/**
-	*	@brief Деструктор.
-	*/
-	~Fraction();
-	
-	/**
-	 * @brief Метод, возвращающий целую часть числа.
-	 * @return Целая часть числа.
-	*/
-	signed long int GetWhole() const;
-	/**
-	 * @brief Метод, возвращающий дробную часть числа.
-	 * @return Дробная часть числа.
-	*/
-	unsigned short int GetFract() const;
-
-	/**
-	 * @brief Метод, возвращающий дробное число.
-	 * @return Дробное число в виде строки.
-	*/
-	std::string GetView() const;
-	
-	/**
-	 * @brief Сравниние два дробных числа и определяет какое больше и меньше.
-	 * @param other Сравниваемое дробное число.
-	 * @return true, если число больше.
-	*/
-	bool AreGreater(const Fraction& other) const;
-	/**
-	 * @brief Метод, возвращающий большее число.
-	 * @return Дробное число.
-	*/
-	Fraction& GetGreater() const;
-	/**
-	 * @brief Метод, возвращающий меньшее число.
-	 * @return Дробное число.
-	*/
-	Fraction& GetLess() const;
-	
-	/**
-	 * @brief Сравнение на равенство дробных чисел.
-	 * @param other Сравниваемое дробное число.
-	 * @return true, если равны.
-	*/
-	bool AreEqual(const Fraction& other) const;
-
-	/**
-	 * @brief Метод сложения с другим дробным числом.
-	 * @param other Второе дробное число.
-	 * @return Дробное число.
-	*/
-	Fraction& Add(const Fraction& other) const;
-	/**
-	 * @brief Метод вычитания с другим дробным числом.
-	 * @param other Второе дробное число.
-	 * @return Дробное число.
-	*/
-	Fraction& Sub(const Fraction& other) const;
-	/**
-	 * @brief Метод деления с другим дробным числом.
-	 * @param other Второе дробное число.
-	 * @return Дробное число.
-	*/
-	Fraction& Div(const Fraction& other) const;
-	/**
-	 * @brief Метод умножения с другим дробным числом.
-	 * @param other Второе дробное число.
-	 * @return Дробное число.
-	*/
-	Fraction& Mul(const Fraction& other) const;
-
 private:
 	/**
 	 * @brief Целая часть дробного числа.
@@ -102,4 +15,92 @@ private:
 	 * @brief Дробная часть дробного числа.
 	*/
 	unsigned short int Fract;
+
+public:
+	/**
+	 * @brief конструктор по умолчанию.
+	*/
+	Fraction();
+	/**
+	 * @brief Параметризованный конструктор.
+	 * @param wh Целая часть.
+	 * @param fr Дробная часть.
+	*/
+	Fraction(const signed long int wh, const unsigned short int fr);
+	/**
+	 * @brief Конструктор копирования.
+	 * @param other Другое дробное число.
+	*/
+	Fraction(const Fraction& other);
+	/**
+	*	@brief Деструктор.
+	*/
+	~Fraction();
+
+	/**
+	 * @brief Инициализация целой части числа.
+	 * @param wh Целая часть числа.
+	 * @return Целая часть числа.
+	*/
+	signed long int setWhole(signed long int wh)
+	{
+		Whole = wh;
+	}
+	/**
+	 * @brief Метод, возвращающий целую часть числа.
+	 * @return Целая часть числа.
+	*/
+	signed long int getWhole() const;
+	/**
+	 * @brief Инициализация дробной части числа.
+	 * @param fr Дробная часть числа.
+	 * @return Дробная чать числа.
+	*/
+	unsigned short int setFract(unsigned short int fr)
+	{
+		Fract = fr;
+	}
+	/**
+	 * @brief Метод, возвращающий дробную часть числа.
+	 * @return Дробная часть числа.
+	*/
+	unsigned short int getFract() const;
+
+	/**
+	 * @brief Метод, возвращающий дробное число.
+	 * @return Дробное число в виде строки.
+	*/
+	std::string toString() const;
+
+	/**
+	 * @brief Сравнивает два дробных числа и определяет какое больше, меньше или они равны.
+	 * @param other Второе дробное число, с которым сравнивается первое.
+	 * @return Пишет какое число из двух больше, либо что они равны. А также большее число.
+	*/
+	Fraction isGLorE(const Fraction& other);
+
+	/**
+	 * @brief Метод сложения с другим дробным числом.
+	 * @param other Второе дробное число, которое прибавляют к первому.
+	 * @return Дробное число.
+	*/
+	Fraction add(const Fraction& other);
+	/**
+	 * @brief Метод вычитания с другим дробным числом.
+	 * @param other Второе дробное число, которое вычитается из первого.
+	 * @return Дробное число.
+	*/
+	Fraction sub(const Fraction& other);
+	/**
+	 * @brief Метод деления с другим дробным числом.
+	 * @param other Второе дробное число, на которое делится первое.
+	 * @return Дробное число.
+	*/
+	Fraction div(const Fraction& other);
+	/**
+	 * @brief Метод умножения с другим дробным числом.
+	 * @param other Второе дробное число, на которое умножается первое.
+	 * @return Дробное число.
+	*/
+	Fraction mul(const Fraction& other);
 };
