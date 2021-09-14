@@ -7,6 +7,7 @@
 class Fraction
 {
 private:
+	
 	/**
 	 * @brief Целая часть дробного числа.
 	*/
@@ -17,6 +18,17 @@ private:
 	unsigned short int Fract;
 
 public:
+	
+	/**
+	 * @brief Целая часть дробного числа.
+	*/
+	signed long int wh;
+	/**
+	 * @brief Дробная часть дробного числа.
+	*/
+	unsigned short int fr;
+	
+	
 	/**
 	 * @brief конструктор по умолчанию.
 	*/
@@ -35,37 +47,22 @@ public:
 	/**
 	*	@brief Деструктор.
 	*/
-	~Fraction();
+	~Fraction() = default;
 
-	/**
-	 * @brief Инициализация целой части числа.
-	 * @param wh Целая часть числа.
-	 * @return Целая часть числа.
-	*/
-	signed long int setWhole(signed long int wh)
-	{
-		Whole = wh;
-	}
+
 	/**
 	 * @brief Метод, возвращающий целую часть числа.
 	 * @return Целая часть числа.
 	*/
 	signed long int getWhole() const;
-	/**
-	 * @brief Инициализация дробной части числа.
-	 * @param fr Дробная часть числа.
-	 * @return Дробная чать числа.
-	*/
-	unsigned short int setFract(unsigned short int fr)
-	{
-		Fract = fr;
-	}
+	
 	/**
 	 * @brief Метод, возвращающий дробную часть числа.
 	 * @return Дробная часть числа.
 	*/
 	unsigned short int getFract() const;
 
+	
 	/**
 	 * @brief Метод, возвращающий дробное число.
 	 * @return Дробное число в виде строки.

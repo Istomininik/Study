@@ -8,10 +8,11 @@ using namespace std;
 Fraction::Fraction()
 	:Whole(0), Fract(0) {}
 
-Fraction::Fraction(const signed long int wh, const unsigned short int fr)
+
+Fraction::Fraction(signed long int wh, unsigned short int fr)
 {
-	setWhole(wh);
-	setFract(fr);
+	wh=Whole;
+	fr=Fract;
 }
 
 Fraction::Fraction(const Fraction& other)
@@ -19,28 +20,19 @@ Fraction::Fraction(const Fraction& other)
 	
 }
 
-signed long int Fraction::setWhole(signed long int wh)
-{
-	cout << "Введите целую часть числа" << endl;
-	cin >> wh;
-	Whole = wh;
-}
+
 signed long int Fraction::getWhole() const
 {
-	cout << "\n Целая часть числа:" << Whole << endl;
-	return Whole;
+	cout << "\n Целая часть числа:" << wh << endl;
+	return wh;
 }
-unsigned short int Fraction::setFract(unsigned short int fr)
-{
-	cout << "Введите дробную часть числа" << endl;
-	cin >> fr;
-	Fract = fr;
-}
+
 unsigned short int Fraction::getFract() const
 {
-	cout << "\n Дробная часть числа" << Fract << endl;
-	return Fract;
+	cout << "\n Дробная часть числа" << fr << endl;
+	return fr;
 }
+
 std::string Fraction::toString() const
 {
 	cout << "\n Число: " << Whole << "." << Fract << endl;
@@ -99,8 +91,8 @@ Fraction Fraction::add(const Fraction& other)
 {
 	signed long int wl(Whole);
 	unsigned short int ft(Fract);
-	unsigned short int x, x1, y, y1;
-	long int n = 1, m = 1, z = 0, k, s;
+	unsigned long int x, x1, y, y1;
+	int n = 1, m = 1, z = 0, k, s;
 	x = Fract;
 	x1 = Fract;
 	y = other.Fract;
@@ -148,7 +140,7 @@ Fraction Fraction::sub(const Fraction& other)
 	signed long int wl(Whole);
 	unsigned short int ft(Fract);
 	unsigned short int x, x1, y, y1;
-	long int n = 1, m = 1, z = 0, k, s;
+	int n = 1, m = 1, z = 0, k, s;
 	x = Fract;
 	x1 = Fract;
 	y = other.Fract;
@@ -211,7 +203,7 @@ Fraction Fraction::div(const Fraction& other)
 	signed long int wl(Whole);
 	unsigned short int ft(Fract);
 	unsigned short int x, x1, y, y1;
-	long int n = 1, m = 1, z = 0, k, s;
+	int n = 1, m = 1, z = 0, k, s;
 	x = Fract;
 	x1 = Fract;
 	y = other.Fract;
@@ -227,7 +219,7 @@ Fraction Fraction::mul(const Fraction& other)
 	signed long int wl(Whole);
 	unsigned short int ft(Fract);
 	unsigned short int x, x1, y, y1;
-	long int n = 1, m = 1, z = 0, k, s;
+	int n = 1, m = 1, z = 0, k, s;
 	x = Fract;
 	x1 = Fract;
 	y = other.Fract;
