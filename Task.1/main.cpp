@@ -10,4 +10,5 @@ int main()
 	a.wh = 5;
 	a.fr = 3;
 	a.getWhole();
+	a.getFract();
 }

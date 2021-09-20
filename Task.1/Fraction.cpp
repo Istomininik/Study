@@ -11,8 +11,8 @@ Fraction::Fraction()
 
 Fraction::Fraction(signed long int wh, unsigned short int fr)
 {
-	wh=Whole;
-	fr=Fract;
+	Whole=wh;
+	Fract=fr;
 }
 
 Fraction::Fraction(const Fraction& other)
@@ -23,13 +23,13 @@ Fraction::Fraction(const Fraction& other)
 
 signed long int Fraction::getWhole() const
 {
-	cout << "\n Целая часть числа:" << wh << endl;
+	cout << "\n Целая часть числа: " << wh << endl;
 	return wh;
 }
 
 unsigned short int Fraction::getFract() const
 {
-	cout << "\n Дробная часть числа" << fr << endl;
+	cout << "\n Дробная часть числа: " << fr << endl;
 	return fr;
 }
 
