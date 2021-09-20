@@ -11,13 +11,13 @@ Fraction::Fraction()
 
 Fraction::Fraction(signed long int wh, unsigned short int fr)
 {
-	Whole=wh;
-	Fract=fr;
+	Whole = wh;
+	Fract = fr;
 }
 
 Fraction::Fraction(const Fraction& other)
 {
-	
+
 }
 
 
@@ -123,7 +123,7 @@ Fraction Fraction::add(const Fraction& other)
 			y1 = y1 * 10 ^ k;
 		}
 		ft = x1 + y1;
-		while (ft > 10 ^ max(n,m))
+		while (ft > 10 ^ max(n, m))
 		{
 			ft = ft - 10 ^ max(n, m);
 			z++;
@@ -164,7 +164,7 @@ Fraction Fraction::sub(const Fraction& other)
 			wl = Whole - other.Whole;
 			ft = x1 - y1;
 		}
-		else 
+		else
 		{
 			wl = Whole - other.Whole;
 			if (wl = 0)

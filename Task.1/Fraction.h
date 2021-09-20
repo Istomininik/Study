@@ -7,7 +7,7 @@
 class Fraction
 {
 private:
-	
+
 	/**
 	 * @brief Целая часть дробного числа.
 	*/
@@ -18,7 +18,7 @@ private:
 	unsigned short int Fract;
 
 public:
-	
+
 	/**
 	 * @brief Целая часть дробного числа.
 	*/
@@ -27,8 +27,8 @@ public:
 	 * @brief Дробная часть дробного числа.
 	*/
 	unsigned short int fr;
-	
-	
+
+
 	/**
 	 * @brief конструктор по умолчанию.
 	*/
@@ -55,14 +55,14 @@ public:
 	 * @return Целая часть числа.
 	*/
 	signed long int getWhole() const;
-	
+
 	/**
 	 * @brief Метод, возвращающий дробную часть числа.
 	 * @return Дробная часть числа.
 	*/
 	unsigned short int getFract() const;
 
-	
+
 	/**
 	 * @brief Метод, возвращающий дробное число.
 	 * @return Дробное число в виде строки.
@@ -80,7 +80,7 @@ public:
 	 * @brief Метод сложения с другим дробным числом.
 	 * @param other Второе дробное число, которое прибавляют к первому.
 	 * @return Дробное число.
-	*/
+	 */
 	Fraction add(const Fraction& other);
 	/**
 	 * @brief Метод вычитания с другим дробным числом.
