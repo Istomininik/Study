@@ -84,7 +84,7 @@ Fraction Fraction::isGLorE(const Fraction& other)
 			}
 		}
 	}
-	return Fraction::Fraction(wl, ft);
+	return Fraction(wl, ft);
 }
 
 Fraction Fraction::add(const Fraction& other)
@@ -133,7 +133,7 @@ Fraction Fraction::add(const Fraction& other)
 	{
 		wl = wl + z;
 	}
-	return Fraction::Fraction(wl, ft);
+	return Fraction(wl, ft);
 }
 Fraction Fraction::sub(const Fraction& other)
 {
@@ -196,7 +196,7 @@ Fraction Fraction::sub(const Fraction& other)
 			}
 		}
 	}
-	return Fraction::Fraction(wl, ft);
+	return Fraction(wl, ft);
 }
 Fraction Fraction::div(const Fraction& other)
 {
@@ -211,7 +211,7 @@ Fraction Fraction::div(const Fraction& other)
 	while ((x /= 10) > 0) n++;
 	while ((y /= 10) > 0) m++;
 
-	return Fraction::Fraction(wl, ft);
+	return Fraction(wl, ft);
 }
 
 Fraction Fraction::mul(const Fraction& other)
@@ -227,5 +227,5 @@ Fraction Fraction::mul(const Fraction& other)
 	while ((x /= 10) > 0) n++;
 	while ((y /= 10) > 0) m++;
 
-	return Fraction::Fraction(wl, ft);
+	return Fraction(wl, ft);
 }
