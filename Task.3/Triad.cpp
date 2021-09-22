@@ -55,9 +55,15 @@ int Triad::operator1(Triad& Triad)
 
 Date::Date()
 {
+<<<<<<< Updated upstream
 	first = 01;
 	second = 01;
 	third = 1900;
+=======
+	first = 0;
+	second = 0;
+	third = 0;
+>>>>>>> Stashed changes
 }
 
 Date::Date(int fr, int sc, int th)

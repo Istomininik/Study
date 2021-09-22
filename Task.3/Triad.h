@@ -14,10 +14,14 @@ public:
 	int fr;
 	int sc;
 	int th;
-	
+
+
 	Triad();
 
 	Triad(int fr, int sc, int th);
+
+
+	~Triad() = default;
 
 	std::string toString();
 
@@ -31,7 +35,10 @@ public:
 
 	Date(int fr, int sc, int th);
 
-	
+
+	~Date() = default;
+
+
 	void setDay(int fr);
 
 	void setMonth(int sc);
