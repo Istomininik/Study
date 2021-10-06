@@ -1,231 +1,114 @@
-﻿#include "Fraction.h"
-#include <iostream>
+﻿/* Если на вход программы подать число начинающееся на 0, как в целую так и дробную часть, то оно будет не корректно распознано(будет другое число).
+*  Также если число в дробной части имеет нули в последних разрядах, то оно с этими нулямии выведится.
+*/
+
+#include "Fraction.h"
 #include <string>
-#include <math.h>
+#include <cmath>
 
-using namespace std;
-
-Fraction::Fraction()
-	:Whole(0), Fract(0) {}
-
-
-Fraction::Fraction(signed long int wh, unsigned short int fr)
+Fraction::Fraction(const long int whole, const unsigned short fract)
+	: m_whole(whole), m_fract(fract)
 {
-	Whole = wh;
-	Fract = fr;
 }
 
 Fraction::Fraction(const Fraction& other)
+	: Fraction(other.get_whole(), other.get_fract())
 {
-
 }
 
-
-signed long int Fraction::getWhole() const
+std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 {
-	cout << "\n Целая часть числа: " << wh << endl;
-	return wh;
+	return os << obj.m_whole << "." << obj.m_fract;
 }
 
-unsigned short int Fraction::getFract() const
+long int Fraction::get_whole() const
 {
-	cout << "\n Дробная часть числа: " << fr << endl;
-	return fr;
+	return m_whole;
 }
 
-std::string Fraction::toString() const
+unsigned short int Fraction::get_fract() const
 {
-	cout << "\n Число: " << Whole << "." << Fract << endl;
-	return std::string();
+	return m_fract;
 }
-Fraction Fraction::isGLorE(const Fraction& other)
+
+void Fraction::set_whole(long int whole)
 {
-	signed long int wl(Whole);
-	unsigned short int ft(Fract);
-	if (Whole > other.Whole)
+	m_whole = whole;
+}
+
+void Fraction::set_fract(unsigned short int fract)
+{
+	m_fract = fract;
+}
+
+/* Метод работает корректно при работе с числами у которых в части после запятой стоит одинаковое количество символов.
+   То есть в дролбную часть числа были введены одинаковые по длине числа. 
+*/ 
+Fraction Fraction::conversion(long int a, unsigned short int b, unsigned short int c) const
+{
+	std::string temp = std::to_string(b);
+	int count_1 = temp.length();
+	temp = std::to_string(c);
+	int count_2 = temp.length();
+	int exp = count_2 - count_1;
+	if (exp > 0)
 	{
-		cout << "Первое число больше второго." << endl;
-		wl = Whole;
-		ft = Fract;
+		int v = pow(10, count_2);
+		int x = c % v;
+		if (a > 0)
+			a = a + c / v;
+		else a = a - c / v;
+		return Fraction(a, x);
+	}
+	else return Fraction(a, c);
+}
+
+Fraction Fraction::sum(const Fraction& other) const
+{
+	long int whole = m_whole + other.m_whole;
+	unsigned short int fract = m_fract + other.m_fract;
+	return conversion(whole, m_fract, fract);
+}
+
+Fraction Fraction::sub(const Fraction& other) const
+{
+	long int whole = m_whole - other.m_whole;
+	if (m_fract >= other.m_fract)
+	{
+		unsigned short int fract = m_fract - other.m_fract;
+		return conversion(whole, m_fract, fract);
 	}
 	else
 	{
-		if (Whole < other.Whole)
-		{
-			cout << "Второе число больше." << endl;
-			wl = other.Whole;
-			ft = other.Fract;
-		}
-		else
-		{
-			if (Whole = other.Whole)
-			{
-				if (Fract > other.Fract)
-				{
-					cout << "Первое число больше." << endl;
-					wl = Whole;
-					ft = Fract;
-				}
-				else
-				{
-					if (Fract < other.Fract)
-					{
-						cout << "Второе число больше." << endl;
-						wl = other.Whole;
-						ft = other.Fract;
-					}
-					else
-					{
-						cout << "Числа равны." << endl;
-						wl = Whole;
-						ft = Fract;
-					}
-				}
-			}
-		}
+		std::string temp = std::to_string(m_fract);
+		int count = temp.length();
+		unsigned short int fract = m_fract + pow(10, count);
+		fract = fract - other.m_fract;
+		whole--;
+		return conversion(whole, m_fract, fract);
 	}
-	return Fraction(wl, ft);
 }
 
-Fraction Fraction::add(const Fraction& other)
+Fraction Fraction::mul(int a) const
 {
-	signed long int wl(Whole);
-	unsigned short int ft(Fract);
-	unsigned long int x, x1, y, y1;
-	int n = 1, m = 1, z = 0, k, s;
-	x = Fract;
-	x1 = Fract;
-	y = other.Fract;
-	y1 = other.Fract;
-	wl = Whole + other.Whole;
-	while ((x /= 10) > 0) n++;
-	while ((y /= 10) > 0) m++;
-	if (n = m)
-	{
-		s = Fract + other.Fract;
-		while (s > 10 ^ n)
-		{
-			s = s - 10 ^ n;
-			z++;
-		}
-		ft = s;
-	}
-	else
-	{
-		if (n < m)
-		{
-			k = m - n;
-			x1 = x1 * 10 ^ k;
-		}
-		else
-		{
-			k = n - m;
-			y1 = y1 * 10 ^ k;
-		}
-		ft = x1 + y1;
-		while (ft > 10 ^ max(n, m))
-		{
-			ft = ft - 10 ^ max(n, m);
-			z++;
-		}
-	}
-	if (z != 0)
-	{
-		wl = wl + z;
-	}
-	return Fraction(wl, ft);
-}
-Fraction Fraction::sub(const Fraction& other)
-{
-	signed long int wl(Whole);
-	unsigned short int ft(Fract);
-	unsigned short int x, x1, y, y1;
-	int n = 1, m = 1, z = 0, k, s;
-	x = Fract;
-	x1 = Fract;
-	y = other.Fract;
-	y1 = other.Fract;
-	while ((x /= 10) > 0) n++;
-	while ((y /= 10) > 0) m++;
-	if (n < m)
-	{
-		k = m - n;
-		x1 = x1 * 10 ^ k;
-	}
-	else
-	{
-		k = n - m;
-		y1 = y1 * 10 ^ k;
-	}
-	if (Whole >= other.Whole)
-	{
-		if (x1 >= y1)
-		{
-			wl = Whole - other.Whole;
-			ft = x1 - y1;
-		}
-		else
-		{
-			wl = Whole - other.Whole;
-			if (wl = 0)
-			{
-				ft = y1 - x1;
-				string wl = "-0";
-			}
-			else
-			{
-				wl = wl - 1;
-				ft = 10 ^ n - (y1 - x1);
-			}
-		}
-	}
-	else
-	{
-		if (x1 <= y1)
-		{
-			wl = Whole - other.Whole;
-			ft = y1 - x1;
-		}
-		else
-		{
-			wl = other.Whole - Whole - 1;
-			ft = 10 ^ n - (x1 - y1);
-			if (wl = 0)
-			{
-				string wl = "-0";
-			}
-		}
-	}
-	return Fraction(wl, ft);
-}
-Fraction Fraction::div(const Fraction& other)
-{
-	signed long int wl(Whole);
-	unsigned short int ft(Fract);
-	unsigned short int x, x1, y, y1;
-	int n = 1, m = 1, z = 0, k, s;
-	x = Fract;
-	x1 = Fract;
-	y = other.Fract;
-	y1 = other.Fract;
-	while ((x /= 10) > 0) n++;
-	while ((y /= 10) > 0) m++;
-
-	return Fraction(wl, ft);
+	long int whole = m_whole * a;
+	unsigned short int fract = m_fract * abs(a);
+	return conversion(whole, m_fract, fract);
 }
 
-Fraction Fraction::mul(const Fraction& other)
+bool Fraction::is_equal(const Fraction& other) const
 {
-	signed long int wl(Whole);
-	unsigned short int ft(Fract);
-	unsigned short int x, x1, y, y1;
-	int n = 1, m = 1, z = 0, k, s;
-	x = Fract;
-	x1 = Fract;
-	y = other.Fract;
-	y1 = other.Fract;
-	while ((x /= 10) > 0) n++;
-	while ((y /= 10) > 0) m++;
+	if ((m_whole == other.m_whole) && (m_fract == other.m_fract))
+		return true;
+	else return false;
+}
 
-	return Fraction(wl, ft);
+bool Fraction::is_greater(const Fraction& other) const
+{
+	if (m_whole > other.m_whole)
+		return true;
+	if (m_whole == other.m_whole)
+		if (m_fract > other.m_fract)
+			return true;
+	return false;
 }
