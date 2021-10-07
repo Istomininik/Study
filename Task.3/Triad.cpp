@@ -1,205 +1,161 @@
 ﻿#include "Triad.h"
-#include <iostream>
+#include <sstream>
 #include <string>
 
 using namespace std;
 
 Triad::Triad()
 {
-	first = 0;
-	second = 0;
-	third = 0;
+    this->first = 0;
+    this->second = 0;
+    this->third = 0;
 }
 
 Triad::Triad(int fr, int sc, int th)
 {
-	first = fr;
-	second = sc;
-	third = th;
+    this->first = fr;
+    this->second = sc;
+    this->third = th;
 }
 
 string Triad::toString()
 {
-    cout << "\n Тройка чисел: " << first << "; " << second << "; " << third << endl;
-    return string();
+    stringstream ss;
+    ss << first << ". " << second << ". " << third;
+    string str = ss.str();
+    return string(str);
 }
 
-int Triad::operator1(Triad& Triad)
+
+void Triad::firstPlus()
 {
-    int a, x;
-    a = 1;
-    cout << "\n Текущая тройка чисел: " << first << "; " << second << "; " << third << endl;
-    while (a != 0)
-    {
-        cout << "\n Введите какое поле хотите увеличить на 1: первое, введите '1', второе введите '2', третье введите '3', если все три поля, то введите '0'. " << endl;
-        cin >> x;
-        if (x == 1)
-            first = first + 1;
-        if (x == 2)
-            second = second + 1;
-        if (x == 3)
-            third = third + 1;
-        if(x == 0)
-        {
-            first = first + 1;
-            second = second + 1;
-            third = third + 1;
-        }
-        cout << "\n Новая тройка чисел: " << first << "; " << second << "; " << third << endl;
-        cout << "\n Хотите ещё измениять поля? Если да, введите 1, нет, введите 0." << endl;
-        cin >> a;
-    }
-    return 0;
+    first++;
+}
+
+void Triad::secondPlus()
+{
+    second++;
+}
+
+void Triad::thirdPlus()
+{
+    third++;
 }
 
 
 Date::Date()
 {
-<<<<<<< Updated upstream
-	first = 01;
-	second = 01;
-	third = 1900;
-=======
-	first = 0;
-	second = 0;
-	third = 0;
->>>>>>> Stashed changes
+    first = 0;
+    second = 0;
+    third = 0;
 }
 
 Date::Date(int fr, int sc, int th)
 {
-	first = fr;
-	second = sc;
-	third = th;
+    first = fr;
+    second = sc;
+    third = th;
 }
-
-
-void Date::setDay(int fr)
-{
-	first = fr;
-}
-
-void Date::setMonth(int sc)
-{
-	second = sc;
-}
-
-void Date::setYear(int th)
-{
-	third = th;
-}
-
-int Date::getDay()
-{
-	return first;
-}
-
-int Date::getMonth()
-{
-	return second;
-}
-
-int Date::getYear()
-{
-	return third;
-}
-
 
 int days_in_month[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 
-
-bool Date::checkDay(Date& date) {
-    for (auto i : { 0, 2, 4, 6, 7, 9, 11 }) 
-    {
-        if (date.getMonth() == i + 1) 
-        {
-            if (date.getDay() >= 1 && date.getDay() <= days_in_month[i]) 
-            {
-                return true;
-            }
-        }
-    }
-    for (auto i : { 3, 5, 8, 10 }) 
-    {
-        if (date.getMonth() == i + 1) 
-        {
-            if (date.getDay() >= 1 && date.getDay() <= days_in_month[i]) 
-            {
-                return true;
-            }
-        }
-    }
-    if (date.getMonth() == 2) 
-    {
-        if (date.getDay() >= 1 && date.getDay() <= 28) 
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Date::checkMonth(Date& date)
+void Date::setDay(int fr, bool a, Date& date) throw(std::invalid_argument)
 {
-    if (date.getMonth() >= 1 && date.getMonth() <= 12) 
+    first = fr;
+    if (a)
     {
-        return true;
+        int x = days_in_month[second - 1];
+        if (date.getDay() < 1 || date.getDay() > x)
+        {
+            throw(invalid_argument("The day is NOT correct!\n"));
+        }
     }
-    return false;
 }
 
-bool Date::checkYear(Date& date)
-{ 
-    if (date.getYear() >= 0) 
+void Date::setMonth(int sc, Date& date) throw(std::invalid_argument)
+{
+    if (sc >= 1 && sc <= 12)
     {
-        return true;
-    }
-    return false;
-}
-
-void Date::checkDate(Date& date)
-{ 
-    if ((checkDay(date) == true) &&
-        (checkMonth(date) == true) &&
-        (checkYear(date) == true)) 
-    {
-        cout << "This date is correct!\n";
+        second = sc;
     }
     else
+        throw(invalid_argument("The month is NOT correct!\n"));
+    int x = days_in_month[second-1];
+    if (date.getDay() < 1 || date.getDay() > x)
     {
-        cout << "This date is NOT correct!\n";
+        throw(invalid_argument("The day is NOT correct!\n"));
     }
 }
 
-
-int Date::operator_n(Date& date)
+void Date::setYear(int th) throw(std::invalid_argument)
 {
-    int n;
-    if ((checkDay(date) == true) &&
-        (checkMonth(date) == true) &&
-        (checkYear(date) == true))
+    if (th >= 0)
     {
-        cout << "This date is correct!\n";
-        cout << "\n Текущая дата: " << first << "." << second << "." << third << endl;
-        cout << "\n Введите количество дней n на которое хотите изменить дату." << endl;
-        cin >> n;
-        first = first + n;
-        while (first > days_in_month[second])
-        {
-            second = second + 1;
-            first = first - days_in_month[second];
-            if (second > 12)
-            {
-                second = 1;
-                third = third + 1;
-            }
-        }
-        cout << "\n Новая дата: " << first << "." << second << "." << third << endl;
+        third = th;
     }
     else
+        throw(invalid_argument("The year is NOT correct!\n"));
+}
+
+int Date::getDay()
+{
+    return first;
+}
+
+int Date::getMonth()
+{
+    return second;
+}
+
+int Date::getYear()
+{
+    return third;
+}
+
+void Date::firstPlus()
+{
+    first++;
+    if (first > days_in_month[second])
     {
-        cout << "This date is NOT correct!\n";
+        first = 1;
+        second++;
+        if (second > 12)
+            second = second - 12;
     }
-    return 0;
+}
+
+void Date::secondPlus() throw(std::invalid_argument)
+{
+    second++;
+    if (second > 12)
+        second = second - 12;
+    int x = days_in_month[second - 1];
+    if (first < 1 || first > x)
+    {
+        throw(invalid_argument("The day is NOT correct!\n"));
+    }
+}
+
+void Date::thirdPlus()
+{
+    third++;
+}
+
+Date Date::Plus_n_Days(int n)
+{
+    first = first + n;
+    while (first > days_in_month[second-1])
+    {
+        second = second + 1;
+        first = first - days_in_month[second-1];
+        if (second > 12)
+        {
+            second = 1;
+            third = third + 1;
+        }
+    }
+    if (first == 0)
+        first++;
+    return Date(first, second, third);
 }
