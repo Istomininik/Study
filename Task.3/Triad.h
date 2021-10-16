@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include <string>
 
+/* В данном решении поставленной задачи все годы имеют одинаковое количество дней.
+* Т.е. во всех годах 365 дней. */
+
+
 /**
  * @brief Класс тройка чисел.
 */
@@ -36,7 +40,7 @@ public:
 	 * @param sc Второе число.
 	 * @param th Третье число.
 	*/
-	Triad(int fr, int sc, int th);
+	Triad(const int fr, const  int sc, const int th);
 
 	/**
 	 * @brief Деструктор.
@@ -84,7 +88,7 @@ public:
 	 * @param sc Месяц (второе число).
 	 * @param th Год (третье число).
 	*/
-	Date(int fr, int sc, int th);
+	Date(const int fr, const int sc, const int th);
 
 	/**
 	 * @brief Деструктор.
@@ -95,17 +99,14 @@ public:
 	/**
 	 * @brief Метод изменения дня.
 	 * @param fr День, на который изменить.
-	 * @param a Да или нет (1 или 0).
-	 * @param date Вся дата.
 	*/
-	void setDay(int fr, bool a, Date& date);	// Переменна "a" нужна для проврки дня на корректность, если будет изменяться только день в дате.
+	void setDay(int fr);	
 
 	/**
 	 * @brief Метод изменения месяца.
 	 * @param sc Месяц, на который изменить.
-	 * @param date Вся дата.
 	*/
-	void setMonth(int sc, Date& date);
+	void setMonth(int sc);
 
 	/**
 	 * @brief Метод для изменения года.
@@ -117,19 +118,19 @@ public:
 	 * @brief Метод, возвращающий день.
 	 * @return День.
 	*/
-	int getDay();
+	int getDay() const;
 
 	/**
 	 * @brief Метод, возвращающий месяц.
 	 * @return Месяц.
 	*/
-	int getMonth();
+	int getMonth() const;
 
 	/**
 	 * @brief Метод, возвоащающий год.
 	 * @return Год.
 	*/
-	int getYear();
+	int getYear() const;
 
 
 	/**
@@ -153,5 +154,5 @@ public:
 	 * @param n Количество дней на которое изменить дату.
 	 * @return Дата.
 	*/
-	Date Plus_n_Days(int n);
+	Date Plus_n_Days(const int n);
 };

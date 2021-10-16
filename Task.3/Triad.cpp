@@ -11,7 +11,7 @@ Triad::Triad()
     this->third = 0;
 }
 
-Triad::Triad(int fr, int sc, int th)
+Triad::Triad(const int fr, const int sc, const int th)
 {
     this->first = fr;
     this->second = sc;
@@ -22,8 +22,7 @@ string Triad::toString()
 {
     stringstream ss;
     ss << first << ". " << second << ". " << third;
-    string str = ss.str();
-    return string(str);
+    return  ss.str();
 }
 
 
@@ -52,63 +51,54 @@ Date::Date()
 
 Date::Date(int fr, int sc, int th)
 {
-    first = fr;
-    second = sc;
-    third = th;
+    setDay(fr);
+    setMonth(sc);
+    setYear(th);
 }
-
+    
 int days_in_month[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 
-void Date::setDay(int fr, bool a, Date& date) throw(std::invalid_argument)
+void Date::setDay(int fr) throw(std::invalid_argument)
 {
-    first = fr;
-    if (a)
-    {
-        int x = days_in_month[second - 1];
-        if (date.getDay() < 1 || date.getDay() > x)
-        {
-            throw(invalid_argument("The day is NOT correct!\n"));
-        }
-    }
-}
-
-void Date::setMonth(int sc, Date& date) throw(std::invalid_argument)
-{
-    if (sc >= 1 && sc <= 12)
-    {
-        second = sc;
-    }
-    else
-        throw(invalid_argument("The month is NOT correct!\n"));
-    int x = days_in_month[second-1];
-    if (date.getDay() < 1 || date.getDay() > x)
+    int x = days_in_month[second - 1];
+    if (fr < 1 || fr > x)
     {
         throw(invalid_argument("The day is NOT correct!\n"));
     }
+    first = fr;
+}
+
+void Date::setMonth(int sc) throw(std::invalid_argument)
+{
+    if (sc < 1 && sc > 12)
+        throw(invalid_argument("The month is NOT correct!\n"));
+    int x = days_in_month[sc-1];
+    if (getDay() < 1 || getDay() > x)
+    {
+        throw(invalid_argument("The day is NOT correct!\n"));
+    }
+    second = sc;
 }
 
 void Date::setYear(int th) throw(std::invalid_argument)
 {
-    if (th >= 0)
-    {
-        third = th;
-    }
-    else
+    if (th < 0)
         throw(invalid_argument("The year is NOT correct!\n"));
+    third = th;
 }
 
-int Date::getDay()
+int Date::getDay() const
 {
     return first;
 }
 
-int Date::getMonth()
+int Date::getMonth() const 
 {
     return second;
 }
 
-int Date::getYear()
+int Date::getYear() const 
 {
     return third;
 }
@@ -142,7 +132,7 @@ void Date::thirdPlus()
     third++;
 }
 
-Date Date::Plus_n_Days(int n)
+Date Date::Plus_n_Days(const int n)
 {
     first = first + n;
     while (first > days_in_month[second-1])
