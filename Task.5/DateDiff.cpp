@@ -1,105 +1,92 @@
 ﻿#include "DateDiff.h"
 #include <sstream>
-#include <string>
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 
 Date::Date()
 {
-	day = 01;
-	month = 01;
+	day = 1;
+	month = 1;
 	year = 1900;
 }
 
-Date::Date(int d, int m, int y)
+Date::Date(const unsigned int d, const unsigned int m, const unsigned int y)
 {
-	day = d;
-	month = m;
-	year = y;
+	setDay(d);
+	setMonth(m);
+	setYear(y);
 }
 
 std::string Date::toString() const
 {
     stringstream ss;
     ss << day << ". " << month << ". " << year;
-    string str = ss.str();
-    return string(str);
+    return ss.str();
 }
 
 int days_in_month[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-int Date::Dif(const Date& other)
+int Date::conversion()
 {
-	int x, y, s, p, k;
-	x = month;
-	y = other.month;
-	s = 0;
-	p = 0;
-	x = x - 1;
+	int x = month-1;
+	int s = 0;
 	while (x > 0)
 	{
-		s = s + days_in_month[x-1];
 		x--;
+		s = s + days_in_month[x];
 	}
 	s = s + day + year * 365;
-	y = y - 1;
-	while (y > 0)
-	{
-		p = p + days_in_month[y-1];
-		y--;
-	}
-	p = p + other.day + other.year * 365;
-	k = s - p;
-	if (k < 0)
-	{
-		k = abs(k);
-	}
-	return k;
+	return s;
 }
 
-int Date::getDay()
+int Date::diff(Date& other)
+{
+	return abs(conversion() - other.conversion());
+}
+
+
+int Date::getDay() const
 {
     return day;
 }
 
-int Date::getMonth()
+int Date::getMonth() const 
 {
     return month;
 }
 
-int Date::getYear()
+int Date::getYear() const 
 {
     return year;
 }
 
 
-void Date::setDay(int d, Date& date)
-{
-	day = d;
-}
 
-void Date::setMonth(int m, Date& date) throw(std::invalid_argument)
+
+void Date::setDay(unsigned int d) throw(invalid_argument)
 {
-	if (m >= 1 && m <= 12)
-	{
-		month = m;
-	}
-	else
-		throw(invalid_argument("The month is NOT correct!\n"));
-	int x = days_in_month[month-1];
-	if (date.getDay() < 1 || date.getDay() > x)
+	if (d < 1 || d > 31)
 	{
 		throw(invalid_argument("The day is NOT correct!\n"));
 	}
+	day = d;
 }
 
-void Date::setYear(int y) throw(std::invalid_argument)
+void Date::setMonth(unsigned int m) throw(std::invalid_argument)
 {
-	if (y >= 0)
+	if (m < 1 || m > 12)
+		throw(invalid_argument("The month is NOT correct!\n"));
+	if (getDay() < 1 || getDay() > days_in_month[m - 1])
 	{
-		year = y;
+		throw(invalid_argument("The day is NOT correct!\n"));
 	}
-	else
+	month = m;
+}
+
+void Date::setYear(unsigned int y) throw(std::invalid_argument)
+{
+	if (y < 0)
 		throw(invalid_argument("The year is NOT correct!\n"));
+	year = y;
 }

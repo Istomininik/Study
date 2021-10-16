@@ -9,7 +9,7 @@
 */
 class Date
 {
-private:
+protected:
 
 	/**
 	 * @brief День.
@@ -39,7 +39,7 @@ public:
 	 * @param m Месяц.
 	 * @param y Год.
 	*/
-	Date(int d, int m, int y);
+	Date(const unsigned int d, const unsigned int m, const unsigned int y);
 
 	/**
 	 * @brief Метод вывода даты в виде строки.
@@ -48,49 +48,54 @@ public:
 	std::string toString() const;
 
 	/**
-	 * @brief Метод, вычисляющий разницу в днях между датами.
+	 * @brief Метод перевода даты в дни.
+	 * @return Количество дней.
+	*/
+	int conversion();
+
+	/**
+	 * @brief Метод, вычисляющий разницу между датами в днях.
 	 * @param other Вторая дата.
 	 * @return Количесво дней.
 	*/
-	int Dif(const Date& other);
+	int diff(Date& other);
 
 
 	/**
 	 * @brief Метод, возвращающий день.
 	 * @return День.
 	*/
-	int getDay();
+	int getDay() const;
 
 	/**
 	 * @brief Метод, возвращяющий месяц.
 	 * @return Месяц.
 	*/
-	int getMonth();
+	int getMonth() const;
 
 	/**
 	 * @brief Метод, возвращающий год.
 	 * @return Год.
 	*/
-	int getYear();
+	int getYear() const;
 
 
 	/**
 	 * @brief Метод изменения дня.
 	 * @param d День, на который изменить.
-	 * @param date Вся дата.
 	*/
-	void setDay(int d,Date& date);
+	void setDay(unsigned int d);
 
 	/**
 	 * @brief Метод изменения месяца.
 	 * @param m Месяц, на который изменить.
-	 * @param date Вся дата.
 	*/
-	void setMonth(int m, Date& date);
+	void setMonth(unsigned int m);
 
 	/**
 	 * @brief Метод для изменения года.
 	 * @param y Год, на который изменить.
 	*/
-	void setYear(int y);
+	void setYear(unsigned int y);
+
 };
