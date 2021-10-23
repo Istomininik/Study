@@ -1,13 +1,17 @@
 ﻿#include "GeometricFigures.h"
+#include <sstream>
+#include <string>
+
+using namespace std;
 
 void GeometricFigures::setRadius(const double radius)
 {
 	if (radius < eps) { throw - 1; }
-	else radius_ = radius;
+	radius_ = radius;
 }
 
 void GeometricFigures::setHeight(const double height)
 {
 	if (height < eps) { throw - 1; }
-	else height_ = height;
+	height_ = height;
 }
